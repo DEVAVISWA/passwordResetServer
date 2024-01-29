@@ -11,7 +11,9 @@ loginRouter.post('/', async(req,res)=> {
     if(!user){
         return res.status(401).json({message:"user doesnt exist"})
     }
-    const isAuthenticated=  bcrypt.compare(Password,user.passwordHash)
+    // console.log(Password,user.passwordHash)
+    const isAuthenticated= await bcrypt.compare(Password,user.passwordHash)
+    // console.log(isAuthenticated)
     if(!isAuthenticated){
         return res.status(400).json({message:'password is wrong'})
     }
